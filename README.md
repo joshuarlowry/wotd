@@ -38,10 +38,59 @@ Details and rationale for these choices live in the docs (see links below).
 - Vercel (deployment)
 - Supabase (optional, when we need a managed database or storage)
 
-## Deployment
+## Getting started (local)
 
-This project is intended to deploy on Vercel. When the application code is added, connect the repository to Vercel and use default build settings. Environment variables and secrets (if any) will be configured in the Vercel dashboard.
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+   App will be available at `http://localhost:3000`.
+3. Production build locally:
+   ```bash
+   npm run build && npm run start
+   ```
+
+## Deploy to Vercel
+
+You have two easy options. No environment variables are required for this initial version.
+
+### A) Git integration (recommended)
+- Push this branch to your GitHub repository.
+- In the Vercel dashboard, click "Import Project" and select the repo.
+- Framework preset: `Next.js` (defaults are fine: `next build`, output handled automatically).
+- Click Deploy. Every push creates a preview; the default branch is production.
+
+### B) CLI deploy
+- Install the CLI and log in:
+  ```bash
+  npm i -g vercel
+  vercel login
+  ```
+- Link the project (create or select a Vercel project):
+  ```bash
+  vercel link
+  ```
+- Deploy to production:
+  ```bash
+  vercel deploy --prod
+  ```
+
+Non-interactive (CI-friendly):
+- Create a Vercel token in your account settings and export it:
+  ```bash
+  export VERCEL_TOKEN=YOUR_TOKEN
+  ```
+- Optionally set `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` if already created.
+- Link and deploy non-interactively:
+  ```bash
+  npx vercel link --project wotd --yes --token "$VERCEL_TOKEN"
+  npx vercel deploy --prod --yes --token "$VERCEL_TOKEN"
+  ```
 
 ## Status
 
-Initial planning and documentation. Implementation to follow.
+Initial app scaffolded with Next.js and ready for Vercel deployment.
