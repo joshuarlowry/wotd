@@ -1,6 +1,15 @@
 import { getWordOfTheDay } from '../lib/wordOfTheDay'
 
-export default function HomePage() {
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: SearchParams
+}) {
+  const params = await searchParams
+  const showFrame = params.frame === 'true' || params.frame === '1'
+  
   const entry = getWordOfTheDay()
   
   // Generate a simple pronunciation (lowercase in brackets)
@@ -14,7 +23,7 @@ export default function HomePage() {
       padding: 'clamp(1rem, 5vw, 3rem)' 
     }}>
       <article 
-        className="frame"
+        className={showFrame ? 'frame' : undefined}
         style={{ 
           width: 'min(520px, 100%)',
           padding: 'clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3rem)',
