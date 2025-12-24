@@ -8,7 +8,7 @@ export default async function HomePage({
   searchParams: SearchParams
 }) {
   const params = await searchParams
-  const showFrame = params.frame !== 'false' && params.frame !== '0'
+  const showFrame = params.frame === 'true' || params.frame === '1'
   
   const entry = getWordOfTheDay()
   
